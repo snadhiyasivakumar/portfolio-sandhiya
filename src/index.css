@@ -1,0 +1,326 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-ink: #0b0b10;
+  --color-ink-2: #12121a;
+  --color-ink-3: #1a1a24;
+  --color-gold: #c4a77d;
+  --color-gold-soft: #e6d3b3;
+  --color-blush: #d4a5a5;
+  --color-peri: #9aa8c7;
+  --color-cream: #f3eee6;
+  --color-muted: #8f8a82;
+  --color-line: rgba(255, 255, 255, 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  overflow-x: hidden;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #0b0b10;
+  color: #f3eee6;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(196, 167, 125, 0.28);
+  color: #fff8ee;
+}
+
+:focus-visible {
+  outline: 2px solid rgba(196, 167, 125, 0.75);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+.glass {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.075) 0%,
+    rgba(255, 255, 255, 0.035) 100%
+  );
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-strong {
+  background: linear-gradient(
+    180deg,
+    rgba(22, 22, 30, 0.78) 0%,
+    rgba(14, 14, 20, 0.7) 100%
+  );
+  backdrop-filter: blur(26px) saturate(160%);
+  -webkit-backdrop-filter: blur(26px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 16px 50px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.noise {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.grid-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.016) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.016) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 20%, black 10%, transparent 75%);
+}
+
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 4px;
+  background: #c4a77d;
+  vertical-align: -0.1em;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes blob-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  40% {
+    transform: translate(50px, -36px) scale(1.08);
+  }
+  70% {
+    transform: translate(-24px, 28px) scale(0.94);
+  }
+}
+
+@keyframes blob-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  35% {
+    transform: translate(-60px, 24px) scale(1.06);
+  }
+  65% {
+    transform: translate(30px, -48px) scale(0.96);
+  }
+}
+
+@keyframes blob-c {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(24px, 40px) scale(1.1);
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes float-tilt {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(5deg);
+  }
+}
+
+@keyframes steam {
+  0% {
+    opacity: 0.1;
+    transform: translateY(4px) scaleX(0.8);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(-8px) scaleX(1.15);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-18px) scaleX(0.7);
+  }
+}
+
+@keyframes snake {
+  0%,
+  100% {
+    transform: rotate(-8deg) translateX(0);
+  }
+  50% {
+    transform: rotate(10deg) translateX(3px);
+  }
+}
+
+@keyframes node-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 1;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -180% 0;
+  }
+  100% {
+    background-position: 180% 0;
+  }
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(3.4);
+    opacity: 0;
+  }
+}
+
+@keyframes cook {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+.animate-blob-a {
+  animation: blob-a 22s ease-in-out infinite;
+}
+.animate-blob-b {
+  animation: blob-b 26s ease-in-out infinite;
+}
+.animate-blob-c {
+  animation: blob-c 20s ease-in-out infinite;
+}
+.animate-float-y {
+  animation: float-y 5.5s ease-in-out infinite;
+}
+.animate-float-tilt {
+  animation: float-tilt 6s ease-in-out infinite;
+}
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+
+.photo-ring {
+  background: conic-gradient(
+    from 180deg,
+    rgba(196, 167, 125, 0.7),
+    rgba(212, 165, 165, 0.35),
+    rgba(154, 168, 199, 0.55),
+    rgba(255, 255, 255, 0.08),
+    rgba(196, 167, 125, 0.7)
+  );
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #f3eee6 0%,
+    #c4a77d 40%,
+    #f3eee6 70%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .caret {
+    animation: none;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0b10;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2a34;
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a46;
+}
